@@ -93,12 +93,7 @@ def home():
     return render_template_string("""
         <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px;">
             <h1 style="color:#2c3e50;">MCQ → HTML Generator</h1>
-            <p>Please upload a CSV file in the following format:</p>
-            <pre style="background:#f4f4f4; padding:10px; border-radius:5px; border:1px solid #ccc;">
-Question,OptionA,OptionB,OptionC,OptionD,CorrectOption
-"What is the capital of France?", "Paris", "London", "Berlin", "Rome", "A"
-"Which planet is known as the Red Planet?", "Earth", "Mars", "Jupiter", "Venus", "B"
-            </pre>
+            <p>📘 Need help? <a href="/howto" style="color:#2980b9;">Click here for step-by-step instructions</a>.</p>
             <form action="/upload" method="post" enctype="multipart/form-data" style="margin-top:20px;">
                 <input type="file" name="file" accept=".csv" required style="margin-bottom:10px;">
                 <br>
@@ -108,6 +103,37 @@ Question,OptionA,OptionB,OptionC,OptionD,CorrectOption
             </form>
         </div>
     """)
+
+@app.route('/howto')
+def howto():
+    return render_template_string("""
+        <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px;">
+            <h1 style="color:#2c3e50;">🧭 How to Use This Tool</h1>
+            <ol style="line-height: 1.8;">
+                <li><b>Use any AI tool</b> (like ChatGPT, Gemini, or Copilot) to generate your MCQ questions in CSV format.<br>
+                    📄 Follow this structure exactly:<br>
+                    <pre style="background:#f4f4f4; padding:10px; border-radius:5px; border:1px solid #ccc;">
+Question,OptionA,OptionB,OptionC,OptionD,CorrectOption
+"What is the capital of France?","Paris","London","Berlin","Rome","A"
+"Which planet is known as the Red Planet?","Earth","Mars","Jupiter","Venus","B"
+                    </pre>
+                </li>
+                <li>💻 <b>Upload the CSV file</b> using this tool and click <b>Generate HTML</b>.</li>
+                <li>🧾 Once generated, <b>open the HTML file in Microsoft Word</b> using the “Open As…” option.</li>
+                <li>📋 <b>Copy the table</b> from Word and paste it into your official <b>NDU Question Paper</b> format.</li>
+            </ol>
+
+            <p style="margin-top:20px; color:#555;">
+                💡 <b>Tip:</b> If the table doesn’t fit perfectly, adjust column widths in Word. You can repeat this process for any subject.
+            </p>
+
+            <a href="/" style="display:inline-block; margin-top:20px; background:#2c3e50; color:white; padding:10px 15px; text-decoration:none; border-radius:5px;">
+                ⬅️ Back to Home
+            </a>
+        </div>
+    """)
+
+
 
 
 # Upload endpoint
@@ -151,3 +177,4 @@ def download(file_id):
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
+
